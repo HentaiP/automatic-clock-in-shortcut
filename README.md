@@ -2,7 +2,7 @@
 
 [English](README.md) | [繁體中文](README_zh.md)
 
-> 📱 A resilient, zero-false-positive iOS/iPadOS Shortcut automation framework for shift attendance, featuring dual-factor environmental geofencing and anti-bot randomized jitter.
+> 📱 An iOS/iPadOS Shortcuts workflow for location-aware attendance messaging, with Wi-Fi and street-address checks, configurable delays, and debug output.
 >
 > Designed & Architected by [HentaiP](https://github.com/HentaiP).
 
@@ -12,18 +12,16 @@
 
 **ACS (Automatic Clock-in Shortcut)** is an automated check-in and attendance dispatch framework built natively on iOS / iPadOS Shortcuts.
 
-Traditional time-based automation scripts suffer from two fatal pitfalls:
-1. **Clockwork Signatures**: Firing at exact `00` seconds creates predictable automated audit trails.
-2. **False-Presence Triggering**: Forgetting to toggle automation off during off-days or remote shifts triggers fraudulent attendance reports.
+The workflow checks the current Wi-Fi SSID and reverse-geocoded street before dispatching a message. A randomized delay is part of the workflow; it is not proof of human interaction or authorization by an attendance system.
 
-ACS resolves these operational challenges by introducing **dual environmental sensor verification (Wi-Fi SSID + GPS Geofence)** and **human-like delay simulation**, ensuring 99.9% unattended operational reliability across multi-year production deployments.
+These checks reduce accidental triggering, but location accuracy, Wi-Fi availability, permissions and iOS background execution can affect results. No quantified reliability or zero-false-positive guarantee is claimed.
 
 ---
 
 ## ⚡ Key Features
 
 - **🛡️ Dual-Factor Environmental Geofencing**: Validates active Wi-Fi SSID and reverse-geocoded GPS street coordinates simultaneously before payload dispatch.
-- **⏱️ Anti-Bot Realistic Jitter (Randomized Delay)**: Injects dynamic entropy (3–8s randomized sleep cycles) to emulate human interaction variance.
+- **⏱️ Randomized Delay**: Includes 3–8s randomized sleep cycles; timing varies and is not a security or anti-detection guarantee.
 - **📊 Embedded Debug & Telemetry Dashboard**: Real-time debug popups capturing Message, Mode, GPS, Wi-Fi, Delay jitter, and dispatch results.
 
 ---
@@ -42,10 +40,14 @@ ACS resolves these operational challenges by introducing **dual environmental se
 |---|---|---|---|
 | `Target_SSID` | `String` | Target workplace Wi-Fi SSID / keyword filter | `Your_Workplace_WiFi` |
 | `Target_Street` | `String` | Target workplace GPS street address substring | `Your_Workplace_Street` |
-| `Line_Target` | `String` | Target messaging recipient / contact name | `あちゃさん` |
+| `Line_Target` | `String` | Target messaging recipient / contact name | `Your_Contact` |
 
 ---
 
+## Usage notes
+
+Configure your own location and recipient, then test with debug output before enabling automation. The linked Shortcut is distributed separately through iCloud; this repository documents its configuration, not a source-verifiable export of every action. Only use it for attendance or messaging workflows you are authorized to automate.
+
 ## 📜 License
 
-Distributed under the [MIT License](LICENSE). Free for educational, research, and personal automation use.
+Distributed under the [MIT License](LICENSE). See the license text for permissions and conditions.
